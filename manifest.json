@@ -12,5 +12,8 @@
     "48": "images/48.png",
     "128": "images/128.png"
   },
+  "browser_action": {
+    "default_title": "Mute Tab Extension"
+  },
   "manifest_version": 2
 }
