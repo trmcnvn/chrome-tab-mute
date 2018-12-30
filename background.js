@@ -22,16 +22,15 @@ const UNMUTED_ICONS = EXTENSION_ICONS.unmuted;
 chrome.tabs.onActivated.addListener(function ({ tabId }) {
   chrome.tabs.get(tabId, function (tab) {
     if (tab.mutedInfo.muted) { return; }
-    let path = tab.audible ? UNMUTED_ICONS : MUTED_ICONS;
-    chrome.browserAction.setIcon({ path, tabId: tab.id });
+    setIconFromAudible(tab.audible, tab.id);
   });
 });
 
 // Listen for tab updates and update the icon to reflect the new state of the tab
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   // Keep the muted icon in sync if the tab was reloaded
-  if ('status' in changeInfo && tab.mutedInfo.muted) {
-    updateUIState(tabId, tab.mutedInfo.muted);
+  if ('status' in changeInfo) {
+    return updateUIState(tab, tab.mutedInfo.muted);
   }
 
   // If we're currently muted or about to be muted, then exit early
@@ -41,8 +40,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
   // Otherwise, check audible state and update icon accordingly.
   if ('audible' in changeInfo) {
-    let path = changeInfo.audible ? UNMUTED_ICONS : MUTED_ICONS;
-    chrome.browserAction.setIcon({ path, tabId });
+    setIconFromAudible(changeInfo.audible, tabId);
   }
 });
 
@@ -67,25 +65,31 @@ chrome.browserAction.onClicked.addListener(function (tab) {
   updateMuteState(tab);
 });
 
-// Helper functions
+// Flip the muted state of the tab
 function updateMuteState(tab) {
-  // Flip the muted state of the tab
   let current_state = tab.mutedInfo.muted;
-  let is_muted = !current_state;
-  chrome.tabs.update(tab.id, { muted: is_muted });
-  updateUIState(tab.id, is_muted);
+  let should_mute = !current_state;
+  chrome.tabs.update(tab.id, { muted: should_mute });
+  updateUIState(tab, should_mute);
 }
 
-function updateUIState(tabId, is_muted) {
-  // Update the UI to reflect the current muted state
+// Update the UI to reflect the current muted state
+function updateUIState(tab, should_mute) {
+  let tabId = tab.id;
   let title = MUTE_TAB_STR;
-  if (is_muted) {
+  if (should_mute) {
     title = UNMUTE_TAB_STR;
     chrome.browserAction.setBadgeText({ text: MUTED_BADGE_STR, tabId });
     chrome.browserAction.setIcon({ path: MUTED_ICONS, tabId });
   } else {
     chrome.browserAction.setBadgeText({ text: '', tabId });
-    chrome.browserAction.setIcon({ path: UNMUTED_ICONS, tabId });
+    setIconFromAudible(tab.audible, tabId);
   }
   chrome.contextMenus.update(CONTEXT_MENU_ID, { title });
+}
+
+// Update icon based on audible state
+function setIconFromAudible(is_audible, tabId) {
+  let path = is_audible ? UNMUTED_ICONS : MUTED_ICONS;
+  chrome.browserAction.setIcon({ path, tabId });
 }
