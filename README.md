@@ -2,7 +2,9 @@
 
 [![](https://img.shields.io/chrome-web-store/v/blljobffcekcbopmkgfhpcjmbfnelkfg.svg?style=for-the-badge)](https://chrome.google.com/webstore/detail/mute-tab/blljobffcekcbopmkgfhpcjmbfnelkfg)
 
-Chrome 71 removed the flag that enables per-tab audio muting. This extension adds a context menu item to restore per-tab muting.
+Chrome 71 removed the flag that enables per-tab audio muting.
+
+This extension allows you to mute individual tabs again by a context menu option or interacting with the extension icon in the browser frame.
 
 ## Usage
 
