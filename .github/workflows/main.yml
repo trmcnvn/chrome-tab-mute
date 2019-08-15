@@ -15,7 +15,7 @@ jobs:
       - run: npm run build
       - uses: trmcnvn/chrome-addon@v1
         with:
-          extension:
+          extension: blljobffcekcbopmkgfhpcjmbfnelkfg
           zip: build/chrome-tab-mute.zip
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
