@@ -9,7 +9,13 @@ const FILES = [
   'images/128_u.png',
   'images/16_m.png',
   'images/48_m.png',
-  'images/128_m.png'
+  'images/128_m.png',
+  'images/16_u_white.png',
+  'images/48_u_white.png',
+  'images/128_u_white.png',
+  'images/16_m_white.png',
+  'images/48_m_white.png',
+  'images/128_m_white.png'
 ];
 
 function run() {
