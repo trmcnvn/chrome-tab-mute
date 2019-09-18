@@ -15,7 +15,10 @@
   "icons": {
     "16": "images/16_u.png",
     "48": "images/48_u.png",
-    "128": "images/128_u.png"
+    "128": "images/128_u.png",
+    "16": "images/16_u_white.png",
+    "48": "images/48_u_white.png",
+    "128": "images/128_u_white.png"
   },
   "browser_action": {
     "default_title": "Mute Tab Extension"

@@ -1,3 +1,6 @@
+// Determine if the browser chrome is dark
+const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 const CONTEXT_MENU_ID = 'dc82bba0-dfd0-484d-9782-c8a27c521121';
 const MUTE_TAB_STR = 'Mute Tab';
 const UNMUTE_TAB_STR = 'Unmute Tab';
@@ -5,14 +8,14 @@ const MUTED_BADGE_STR = ' M ';
 const BADGE_BACKGROUND = '#212121';
 const EXTENSION_ICONS = Object.freeze({
   muted: {
-    '16': 'images/16_m.png',
-    '48': 'images/48_m.png',
-    '128': 'images/128_m.png',
+    '16': `images/16_m${isDarkTheme ? '_white' : ''}.png`,
+    '48': `images/48_m${isDarkTheme ? '_white' : ''}.png`,
+    '128': `images/128_m${isDarkTheme ? '_white' : ''}.png`,
   },
   unmuted: {
-    '16': 'images/16_u.png',
-    '48': 'images/48_u.png',
-    '128': 'images/128_u.png',
+    '16': `images/16_u${isDarkTheme ? '_white' : ''}.png`,
+    '48': `images/48_u${isDarkTheme ? '_white' : ''}.png`,
+    '128': `images/128_u${isDarkTheme ? '_white' : ''}.png`,
   },
 });
 const MUTED_ICONS = EXTENSION_ICONS.muted;
