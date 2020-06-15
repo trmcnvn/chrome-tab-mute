@@ -1,6 +1,6 @@
 {
   "name": "Mute Tab",
-  "version": "1.4",
+  "version": "1.5",
   "description": "Restores the 'Mute Tab' functionality of versions prior to Chrome 71.",
   "background": {
     "scripts": [
