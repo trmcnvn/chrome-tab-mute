@@ -47,20 +47,23 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 });
 
-// Create context menu on all available menus
-chrome.contextMenus.create({
-  id: CONTEXT_MENU_ID,
-  type: 'normal',
-  title: MUTE_TAB_STR,
-  contexts: ['all'] // Chrome doesn't allow us to add a custom context menu item to the actual tab.
-});
+// Only create listeners if not already set up to prevent error
+if (!chrome.contextMenus.onClicked.hasListeners()) {
+  // Create context menu on all available menus
+  chrome.contextMenus.create({
+    id: CONTEXT_MENU_ID,
+    type: 'normal',
+    title: MUTE_TAB_STR,
+    contexts: ['all'] // Chrome doesn't allow us to add a custom context menu item to the actual tab.
+  });
 
-// Modify the mute state when interacting with the context menu option
-chrome.contextMenus.onClicked.addListener(function (info, tab) {
-  if (info.menuItemId === CONTEXT_MENU_ID) {
-    updateMuteState(tab);
-  }
-});
+  // Modify the mute state when interacting with the context menu option
+  chrome.contextMenus.onClicked.addListener(function (info, tab) {
+    if (info.menuItemId === CONTEXT_MENU_ID) {
+      updateMuteState(tab);
+    }
+  });
+}
 
 // Browser frame icon
 chrome.browserAction.setBadgeBackgroundColor({ color: BADGE_BACKGROUND });
