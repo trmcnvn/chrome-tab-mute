@@ -3,14 +3,14 @@
   "version": "1.5",
   "description": "Restores the 'Mute Tab' functionality of versions prior to Chrome 71.",
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "service_worker.js",
+    "type": "module"
   },
   "permissions": [
     "activeTab",
-    "contextMenus"
+    "contextMenus",
+    "offscreen",
+    "storage"
   ],
   "icons": {
     "16": "images/16_u.png",
@@ -20,8 +20,8 @@
     "48": "images/48_u_white.png",
     "128": "images/128_u_white.png"
   },
-  "browser_action": {
+  "action": {
     "default_title": "Mute Tab Extension"
   },
-  "manifest_version": 2
+  "manifest_version": 3
 }
