@@ -3,7 +3,9 @@ const fs = require('fs');
 
 const FILES = [
   'manifest.json',
-  'background.js',
+  'service_worker.js',
+  'offscreen.html',
+  'offscreen.js',
   'images/16_u.png',
   'images/48_u.png',
   'images/128_u.png',
